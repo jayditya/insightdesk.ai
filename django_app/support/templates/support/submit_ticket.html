@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Submit Ticket</title>
+    <link rel="stylesheet" href="{% static 'css/submit_ticket.css' %}">
+</head>
+<body>
+    <div class="container">
+        {% if user_name %}
+            <div class="top-right">
+                <span>Welcome, {{ user_name }}</span>
+                <a href="{% url 'logout' %}" class="logout">Logout</a>
+            </div>
+        {% endif %}
+
+        <h1>INSIGHTDESK AI</h1>
+        <h1>What technical problem are you facing?</h1>
+        <h2>Get Help from AI</h2>
+
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li class="message">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+
+            {% if not hide_user_fields %}
+                {{ form.name.label_tag }} {{ form.name }}
+                {{ form.email.label_tag }} {{ form.email }}
+            {% endif %}
+
+            {{ form.message.label_tag }} {{ form.message }}
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

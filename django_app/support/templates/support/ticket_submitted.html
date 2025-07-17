@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ticket Submitted</title>
+    <link rel="stylesheet" href="{% static 'css/ticket_submitted.css' %}">
+</head>
+<body>
+    <div class="container">
+        {% if user_name %}
+            <div class="top-right">
+                <span>Welcome, {{ user_name }}</span>
+                <a href="{% url 'logout' %}" class="logout">Logout</a>
+            </div>
+        {% endif %}
+
+        <h1>Thank You!</h1>
+        <p>Your ticket has been submitted successfully.</p>
+
+        <h3>Ticket Details:</h3>
+        <ul>
+            <li><strong>Name:</strong> {{ ticket.name }}</li>
+            <li><strong>Email:</strong> {{ ticket.email }}</li>
+            <li><strong>Message:</strong> {{ ticket.message }}</li>
+        </ul>
+
+        <h2>AI Response:</h2>
+        <p>{{ ticket.response }}</p>
+
+        <a href="{% url 'submit_ticket' %}" class="button">Submit Another Ticket</a>
+    </div>
+</body>
+</html>
