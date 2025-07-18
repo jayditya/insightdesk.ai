@@ -4,3 +4,10 @@ setuptools
 scikit-learn
 numpy
 pandas
+gunicorn 
+pandas 
+scikit-learn 
+numpy 
+joblib 
+python-dateutil 
+sqlparse 
