@@ -19,7 +19,7 @@ def submit_ticket(request):
             request.session['user_email'] = form.cleaned_data['email']
 
             # Send to Flask for AI response
-            response = requests.post('http://127.0.0.1:5000/predict', json={"message": ticket.message})
+            response = requests.post('https://insightdesk-ml.onrender.com/predict', json={"message": ticket.message})
             if response.ok:
                 ticket.response = response.json().get('response', 'AI could not generate a response.')
             else:
