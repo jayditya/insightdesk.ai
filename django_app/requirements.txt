@@ -1,6 +1,8 @@
 Django>=4.2
 gunicorn
-psycopg2-binary
 requests
-django-environ
+psycopg2-binary
 whitenoise
+django-environ
+Flask
+scikit-learn
