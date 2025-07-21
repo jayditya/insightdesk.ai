@@ -16,9 +16,7 @@ SECRET_KEY = 'django-insecure-ea%sgtvt#$3es^-ic!wc1t**0z=a$2h7o09axj%@q$ur)!e!!i
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['insightdesk-django-production.up.railway.app',
-    'localhost',
-    '127.0.0.1',]
+ALLOWED_HOSTS = ['insightdesk-django-production.up.railway.app','localhost','127.0.0.1']
 
 # Application definition
 INSTALLED_APPS = [
