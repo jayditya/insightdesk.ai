@@ -1,27 +1,44 @@
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
-import pickle
+import joblib
 import os
 
-# Load dataset
-df = pd.read_csv("support_data.csv")
+print("--- Starting Model Training from Excel Dataset ---")
+
+try:
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    
+    # --- CHANGE #1: Point to the new .xlsx file ---
+    excel_path = os.path.join(script_dir, 'support_data.xlsx')
+    
+    # --- CHANGE #2: Use the read_excel function ---
+    df = pd.read_excel(excel_path)
+    
+    print("✅ Step 1: Successfully loaded 'support_data.xlsx'.")
+except FileNotFoundError:
+    print(f"❌ ERROR: 'support_data.xlsx' not found. Please run the 'create_excel_dataset.py' script first.")
+    exit()
+
+print("🔎 Column names found:", df.columns.tolist())
+
+# The column names 'message' and 'category' match our new Excel file
 X = df['message']
-y = df['response']
+y = df['category']
 
-# Vectorizer and model training
+print("\nStep 2: Converting text data to numerical vectors...")
 vectorizer = TfidfVectorizer()
-X_vec = vectorizer.fit_transform(X)
+X_vectorized = vectorizer.fit_transform(X)
+print("✅ Step 2 complete.")
 
+print("\nStep 3: Training the new, smarter model...")
 model = LogisticRegression()
-model.fit(X_vec, y)
+model.fit(X_vectorized, y)
+print("✅ Step 3 complete.")
 
-# ✅ Create ml_model folder if it doesn't exist
-os.makedirs("ml_model", exist_ok=True)
+# Save the newly trained model and vectorizer files
+joblib.dump(model, os.path.join(script_dir, 'insight_model.pkl'))
+joblib.dump(vectorizer, os.path.join(script_dir, 'vectorizer.pkl'))
 
-# ✅ Save model and vectorizer as .pkl files
-with open("model.pkl", "wb") as f:
-    pickle.dump(model, f)
-
-with open("vectorizer.pkl", "wb") as f:
-    pickle.dump(vectorizer, f)
+print("\n--- ✅ SUCCESS! ---")
+print("New model has been trained on the Excel data and saved successfully.")

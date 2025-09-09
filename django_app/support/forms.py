@@ -1,7 +1,9 @@
 from django import forms
-from .models import Ticket
+# The fix is on this line: we import the correct model name.
+from .models import SupportTicket
 
 class TicketForm(forms.ModelForm):
     class Meta:
-        model = Ticket
+        # And we use the correct model name here as well.
+        model = SupportTicket
         fields = ['name', 'email', 'message']

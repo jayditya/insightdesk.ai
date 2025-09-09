@@ -1,4 +1,6 @@
 from django.contrib import admin
-from .models import Ticket
+# The fix is on this line: we import the correct model name.
+from .models import SupportTicket
 
-admin.site.register(Ticket)
+# This line registers your model with the Django admin site.
+admin.site.register(SupportTicket)

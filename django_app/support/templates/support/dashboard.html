@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="{% static 'css/dashboard.css ' %}">
+</head>
+<body>
+  <div class="container">
+    <h2>Support Ticket Dashboard</h2>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Message</th>
+        <th>AI Response</th>
+      </tr>
+      {% for ticket in tickets %}
+      <tr>
+        <td>{{ ticket.name }}</td>
+        <td>{{ ticket.email }}</td>
+        <td>{{ ticket.message }}</td>
+        <td>{{ ticket.response }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</body>
+</html>

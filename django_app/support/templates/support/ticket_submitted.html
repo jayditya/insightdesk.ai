@@ -1,9 +1,11 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Ticket Submitted</title>
-    <link rel="stylesheet" href="{% static 'css/ticket_submitted.css' %}">
+    <!-- You can create a new CSS file for this page if you want -->
+    <link rel="stylesheet" href="{% static 'css/submit_ticket.css' %}">
 </head>
 <body>
     <div class="container">
@@ -15,19 +17,18 @@
         {% endif %}
 
         <h1>Thank You!</h1>
-        <p>Your ticket has been submitted successfully.</p>
+        <p>Your ticket has been submitted successfully and answered by our AI.</p>
 
-        <h3>Ticket Details:</h3>
-        <ul>
-            <li><strong>Name:</strong> {{ ticket.name }}</li>
-            <li><strong>Email:</strong> {{ ticket.email }}</li>
-            <li><strong>Message:</strong> {{ ticket.message }}</li>
-        </ul>
+        <div class="ticket-details">
+            <h3>Your Message:</h3>
+            <p>{{ ticket.message }}</p>
 
-        <h2>AI Response:</h2>
-        <p>{{ ticket.response }}</p>
+            <h3 class="ai-response-title">AI's Instant Response:</h3>
+            <p class="ai-response-text">{{ ticket.response }}</p>
+        </div>
 
         <a href="{% url 'submit_ticket' %}" class="button">Submit Another Ticket</a>
+        <a href="{% url 'dashboard' %}" class="button">View All Tickets</a>
     </div>
 </body>
 </html>
